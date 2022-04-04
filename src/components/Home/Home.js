@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserReviews from '../../hooks/UserReviews';
+import Cart from '../Cart/Cart';
 
 const Home = () => {
+  const [reviews, setReviews] = UserReviews();
   return (
     <div>
       <div className='flex items-center max-w-7xl  mx-auto justify-between min-h-[85vh]'>
@@ -17,8 +20,21 @@ const Home = () => {
         </div>
       </div>
       <h3 className='text-center text-5xl mb-10'>Customer Reviews</h3>
-      <div className='flex justify-center bg-blue-500 max-w-sm  mx-auto rounded'><Link to='reviews'>See All Reviews</Link></div>
-      
+      <div className="reviews max-w-7xl  mx-auto grid gap-2 grid-cols-3">
+        
+        {
+          reviews.slice(0,3).map((review) =>
+            <Cart
+              review={review}
+              key={review.id}
+            ></Cart>
+          )
+        }
+         
+      </div>
+      <div className='flex justify-center bg-blue-500 max-w-sm  mx-auto rounded h-[30px] mb-10'><Link className='font-bold mt-1' to='reviews'>See All Reviews</Link></div>
+     
+
     </div>
   );
 };
